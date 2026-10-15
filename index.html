@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>Growth Audit — Hiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: only light;
+  /* ---- Hiki, extracted from their App Store screens and site ---- */
+  --hk-pink:#FE2E77; --hk-pink-deep:#FA0C77; --hk-pink-soft:#FFE3EE;
+  --hk-lav:#7E80BA; --hk-lav-soft:#E3E4F1; --hk-lav-ink:#4E5096;
+  --hk-bg:#FFFFFF; --hk-bg2:#F6F6F8; --hk-chip:#EFEFF1; --hk-line:#E7E7EB;
+  --hk-ink:#111111; --hk-txt2:#6F6F74; --hk-txt3:#A2A2A8; --hk-btn:#222222;
+  --hk-gold:#F2A51A;
+  --r-ctl:12px; --r-media:18px;
+  /* ---- the report shell (deliberately not their palette) ---- */
+  --bg:#08090B; --bg2:#0E1013; --surf:#14171B;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.13);
+  --ink:#F7F9FB; --ink2:#A4ACB5; --ink3:#6C757E;
+  --accent:#FE2E77; --accent-lift:#FF6FA3;
+  --panel:#FFFFFF; --panel-ink:#15181B; --panel-muted:#5F666D; --panel-line:#E9ECEF;
+  --accent-ink:#C8105A;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 16px}}
+
+/* ============ top bar ============ */
+.nav{position:sticky;top:0;z-index:70;background:rgba(8,9,11,.82);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--hair)}
+.nav-in{max-width:1080px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;gap:18px}
+@media(max-width:700px){.nav-in{padding:0 16px;gap:12px}}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.nav-brand .mk{width:20px;height:20px;flex:none;border-radius:6px;background:var(--accent);display:grid;place-items:center}
+.nav-brand .mk svg{width:12px;height:12px}
+.nav-brand span{color:var(--ink2);font-weight:500}
+.nav-brand b{color:var(--ink);font-weight:600}
+.nav-links{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav-links button{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3);transition:.16s}
+.nav-links button:hover{color:var(--ink)}
+.nav-links button.on{color:var(--ink);background:rgba(255,255,255,.07)}
+@media(max-width:640px){.nav-brand span{display:none}}
+.view{display:none}
+.view.on{display:block}
+
+/* ============ hero ============ */
+.hero{padding:104px 0 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-340px;left:50%;transform:translateX(-50%);width:1100px;height:640px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(254,46,119,.22),transparent 72%)}
+.hero>*{position:relative}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lift);margin-bottom:26px}
+.hero h1{font-size:76px;line-height:.98;font-weight:700;letter-spacing:-.045em;margin:0 0 24px}
+@media(max-width:820px){.hero h1{font-size:50px}.hero{padding-top:70px}}
+.hero .lede{font-size:20px;line-height:1.5;font-weight:400;color:var(--ink2);max-width:600px;margin:0 auto;letter-spacing:-.012em}
+@media(max-width:820px){.hero .lede{font-size:17px}}
+.hero .meta{margin-top:30px;font-size:12.5px;color:var(--ink3);letter-spacing:.02em}
+.hero .meta b{color:var(--ink2);font-weight:600}
+.stats{display:flex;justify-content:center;margin:70px auto 0;max-width:760px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stat{flex:1;padding:26px 14px;text-align:center;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35}
+@media(max-width:700px){.stat b{font-size:19px}.stat{padding:18px 8px}}
+.fb{max-width:760px;margin:0 auto;padding:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left}
+@media(max-width:700px){.fb{grid-template-columns:1fr;gap:20px;padding-top:24px}}
+.fb-k{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-align:center;margin-bottom:-6px}
+.fb-i{display:flex;gap:12px;align-items:flex-start}
+.fb-i .tick{width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(254,46,119,.16);display:grid;place-items:center}
+.fb-i .tick svg{width:10px;height:10px;stroke:var(--accent-lift);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fb-i p{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+.fb-i p b{color:var(--ink);font-weight:700}
+
+/* ============ sections ============ */
+.sec{padding:96px 0}
+.sec-k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.sec h2{font-size:38px;line-height:1.14;font-weight:700;letter-spacing:-.035em;margin:0 0 20px;max-width:680px}
+@media(max-width:820px){.sec h2{font-size:29px}.sec{padding:64px 0}}
+.sec p.body{font-size:17px;line-height:1.66;color:var(--ink2);max-width:640px;margin:0 0 18px;letter-spacing:-.008em}
+.sec p.body b{color:var(--ink);font-weight:600}
+.rule{height:1px;background:var(--hair);margin:0}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;max-width:820px}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+.note{background:var(--surf);border:1px solid var(--hair);border-radius:16px;padding:24px 26px}
+.note h4{font-size:15px;font-weight:700;letter-spacing:-.015em;margin:0 0 8px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
+
+/* ============ the five ideas ============ */
+.ideas{display:flex;flex-direction:column;margin-top:14px;border-top:1px solid var(--hair)}
+.idea{display:grid;grid-template-columns:52px 1fr 180px;gap:26px;align-items:start;padding:30px 4px;border-bottom:1px solid var(--hair);text-align:left;width:100%;transition:.18s}
+.idea:hover{background:rgba(255,255,255,.022)}
+@media(max-width:780px){.idea{grid-template-columns:38px 1fr;gap:16px}}
+.idea .no{font-size:13px;font-weight:700;color:var(--ink3);padding-top:4px;letter-spacing:.02em}
+.idea h3{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.024em;margin:0 0 7px}
+@media(max-width:820px){.idea h3{font-size:18px}}
+.idea p{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;max-width:540px}
+.idea .out{text-align:right;padding-top:3px}
+@media(max-width:780px){.idea .out{grid-column:2;text-align:left;padding-top:12px}}
+.idea .out b{display:block;font-size:19px;font-weight:700;letter-spacing:-.025em;color:var(--accent-lift);white-space:nowrap}
+.idea .out span{display:block;font-size:10.5px;color:var(--ink3);margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.idea .seeit{display:inline-flex;align-items:center;gap:5px;margin-top:11px;font-size:12.5px;font-weight:600;color:var(--accent-lift)}
+.idea .seeit svg{width:12px;height:12px}
+.band{background:var(--surf);border:1px solid var(--hair);border-radius:20px;padding:40px 44px;margin-top:44px;display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+@media(max-width:700px){.band{padding:28px 24px;gap:22px}}
+.band .lab{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.band .txt{flex:1;min-width:240px}
+.band .txt p{font-size:15.5px;line-height:1.6;color:var(--ink2);margin:0}
+.band .nums{display:flex;gap:34px}
+.band .nums div b{display:block;font-size:30px;font-weight:700;letter-spacing:-.035em;color:var(--accent-lift)}
+.band .nums div span{display:block;font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.cta-row{display:flex;justify-content:center;margin-top:52px}
+.bigbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;letter-spacing:-.01em;padding:15px 26px;border-radius:30px;transition:.16s}
+.bigbtn:hover{filter:brightness(1.1)}
+.bigbtn svg{width:15px;height:15px}
+.foot{border-top:1px solid var(--hair);padding:36px 0 70px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+
+/* ============ prototype stage ============ */
+.stage{display:grid;grid-template-columns:minmax(440px,1fr) minmax(400px,470px);align-items:start;min-height:calc(100vh - 58px)}
+@media(max-width:1080px){.stage{grid-template-columns:1fr}}
+.phonecol{padding:34px 24px 46px;display:flex;flex-direction:column;align-items:center;gap:18px;min-width:0}
+.panelcol{border-left:1px solid var(--hair);background:var(--panel);color:var(--panel-ink);min-height:calc(100vh - 58px);position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto}
+@media(max-width:1080px){.panelcol{position:static;max-height:none;min-height:0;border-left:none;border-top:1px solid var(--hair)}}
+@media(max-width:470px){.phone{transform:scale(.86);transform-origin:top center;margin-bottom:-118px}}
+
+/* phone */
+.phone{position:relative;width:390px;height:844px;flex:none;background:#000;border:11px solid #000;border-radius:46px;box-shadow:0 0 0 1.5px #2B3035,0 34px 70px -18px rgba(0,0,0,.85)}
+.phone-in{position:absolute;inset:0;border-radius:36px;overflow:hidden;background:var(--hk-bg);color-scheme:only light;color:var(--hk-ink)}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;border-radius:16px;z-index:60;pointer-events:none}
+.sbar{position:absolute;top:0;left:0;right:0;height:50px;z-index:55;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:14px 26px 0;font-size:13px;font-weight:700;color:#111;transition:color .3s}
+.phone.dark .sbar{color:#fff}
+.sbar .glyphs{display:flex;gap:5px;align-items:center}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(0,0,0,.8);z-index:56;pointer-events:none}
+.phone.dark .homebar{background:rgba(255,255,255,.85)}
+.screenwrap{position:absolute;inset:0;overflow:hidden;background:var(--hk-bg)}
+
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--hk-bg);transform:translateX(100%);transition:transform .36s cubic-bezier(.32,.72,0,1);z-index:10;will-change:transform}
+.scr.is-active{transform:translateX(0);z-index:20}
+.scr.is-past{transform:translateX(-24%)}
+.scr.sheet{transform:translateY(100%)}
+.scr.sheet.is-active{transform:translateY(0);z-index:30}
+.scr.nofx{transition:none}
+.scr-top{flex:none;padding:56px 22px 0}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 22px;scrollbar-width:none}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-body.dock{display:flex;flex-direction:column}
+.scr-foot{flex:none;padding:12px 22px 30px}
+
+.scr-nav{display:flex;align-items:center;gap:14px;height:36px}
+.scr-back{width:30px;height:30px;flex:none;display:grid;place-items:center;color:var(--hk-ink)}
+.scr-back svg{width:22px;height:22px}
+.scr-prog{flex:1;height:4px;border-radius:2px;background:var(--hk-chip);overflow:hidden}
+.scr-prog i{display:block;height:100%;background:var(--hk-pink);border-radius:2px}
+.scr-h{font-size:27px;line-height:1.15;font-weight:800;letter-spacing:-.025em;margin:20px 0 0;color:var(--hk-ink)}
+.scr-sub{font-size:14px;line-height:1.45;color:var(--hk-txt2);margin:8px 0 0}
+.scr-h .hand{font-family:'Caveat',cursive;font-weight:700;font-size:1.22em;letter-spacing:0;color:var(--hk-pink)}
+
+.btn{display:block;width:100%;border-radius:var(--r-ctl);height:54px;font:700 16px/1 'Figtree',sans-serif;letter-spacing:-.01em;background:var(--hk-btn);color:#fff;transition:filter .15s}
+.btn:hover{filter:brightness(1.25)}
+.btn[disabled]{background:#D6D6DA;color:#8E8E94;cursor:default}
+.btn.white{background:#fff;color:var(--hk-ink)}
+.btn.ghost{background:transparent;color:var(--hk-txt2);font-weight:600;height:38px;font-size:13.5px}
+.helper{font-size:12px;line-height:1.45;color:var(--hk-txt3);text-align:center;margin:0 0 10px}
+.helper b{color:var(--hk-txt2)}
+
+/* welcome */
+.scr--pink{background:var(--hk-pink)}
+.scr--pink .scr-body,.scr--pink .scr-foot{color:#fff}
+.wm{height:30px;width:auto;display:block}
+.wm.dark{filter:brightness(0)}
+.wel-h{font-family:'Caveat',cursive;font-weight:700;font-size:56px;line-height:.95;color:#fff;margin:18px 0 0;letter-spacing:0}
+.wel-h u{text-decoration-thickness:3px;text-underline-offset:7px}
+.map{position:relative;width:300px;height:300px;margin:26px auto 0;flex:none}
+.map .disc{position:absolute;inset:18px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFF1F6 0%,#FFD9E7 100%)}
+.map .ring{position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.35)}
+.map .st{position:absolute;height:1.5px;background:rgba(254,46,119,.12);transform-origin:left center}
+.pin{position:absolute;border-radius:50%;background:#fff;padding:4px;box-shadow:0 6px 16px rgba(160,0,60,.22)}
+.pin img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;transform:scale(1.14)}
+.pin span{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden}
+.pin::after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #fff}
+.wel-sub{font-size:19px;line-height:1.25;font-weight:800;text-align:right;letter-spacing:-.015em;margin-top:auto;padding-top:14px}
+.wel-proof{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.92);margin:0 0 12px}
+.wel-proof i{width:7px;height:7px;border-radius:50%;background:#7CF0A4;display:block}
+.scr--pink .helper{color:rgba(255,255,255,.75)}
+
+/* choice rows (single / multi) */
+.rows{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.ro{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--hk-bg2);border:1.5px solid transparent;border-radius:var(--r-ctl);padding:15px 16px;font:700 16px/1.25 'Figtree',sans-serif;color:var(--hk-ink);transition:.15s}
+.ro .ic{width:40px;height:40px;flex:none;border-radius:11px;background:#fff;display:grid;place-items:center}
+.ro .ic svg{width:22px;height:22px}
+.ro small{display:block;font-size:12.5px;font-weight:500;color:var(--hk-txt2);margin-top:2px}
+.ro .bx{margin-left:auto;width:22px;height:22px;border-radius:7px;border:1.5px solid #CFCFD5;flex:none;display:grid;place-items:center;transition:.15s}
+.ro .bx svg{width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none;opacity:0}
+.ro.on{border-color:var(--hk-ink);background:#fff}
+.ro.on .bx{background:var(--hk-ink);border-color:var(--hk-ink)}
+.ro.on .bx svg{opacity:1}
+
+/* trait chips — their signature control */
+.tsec{margin-top:18px}
+.tsec h4{font-size:14px;font-weight:700;color:var(--hk-txt2);margin:0 0 9px}
+.tchips{display:flex;flex-wrap:wrap;gap:8px}
+.tc{padding:10px 13px;border-radius:10px;background:var(--hk-chip);font:600 13.5px/1.1 'Figtree',sans-serif;color:var(--hk-ink);transition:.14s;border:1.5px solid transparent}
+.tc:hover{background:#E6E6EA}
+.tc.on{background:var(--hk-lav-soft);border-color:var(--hk-lav)}
+.brain{width:26px;height:26px;margin-top:18px;display:block}
+.picked{font-size:12px;font-weight:700;color:var(--hk-lav-ink)}
+
+/* loader */
+.scr--load{background:var(--hk-lav)}
+.loadwrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:20px 0}
+.orbit{position:relative;width:150px;height:150px;margin-bottom:24px}
+.orbit .core{position:absolute;inset:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.orbit .core img{width:44px;filter:brightness(0) saturate(100%) invert(31%) sepia(82%) saturate(3300%) hue-rotate(321deg)}
+.orbit .o{position:absolute;inset:0;border-radius:50%;border:1.5px dashed rgba(255,255,255,.5);animation:spin 9s linear infinite}
+.orbit .o img{position:absolute;width:40px;height:40px;border-radius:50%;border:3px solid #fff;object-fit:cover}
+.orbit .o img:nth-child(1){top:-18px;left:55px}.orbit .o img:nth-child(2){bottom:2px;left:-8px}.orbit .o img:nth-child(3){bottom:2px;right:-8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-h{font-family:'Caveat',cursive;font-size:38px;font-weight:700;color:#fff;text-align:center;margin:0 0 18px;line-height:1}
+.load-steps{width:100%;max-width:290px;display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.lstep{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.55);transition:.35s;line-height:1.3}
+.lstep.on{color:#fff}
+.lstep .dot{width:20px;height:20px;flex:none;border-radius:50%;border:1.8px solid rgba(255,255,255,.45);display:grid;place-items:center;transition:.35s}
+.lstep.on .dot{background:#fff;border-color:#fff}
+.lstep .dot svg{width:11px;height:11px;stroke:var(--hk-lav);stroke-width:3.2;fill:none;opacity:0;stroke-linecap:round;stroke-linejoin:round}
+.lstep.on .dot svg{opacity:1}
+.quote{width:100%;max-width:300px;background:#fff;border-radius:var(--r-media);padding:15px 16px;min-height:110px;color:var(--hk-ink)}
+.quote p{margin:0;font-size:13px;line-height:1.5}
+.quote b{display:block;margin-top:8px;font-size:12px;font-weight:700;color:var(--hk-txt2)}
+.qdots{display:flex;gap:5px;justify-content:center;margin-top:12px}
+.qdots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.45);transition:.3s}
+.qdots i.on{background:#fff;width:15px;border-radius:3px}
+
+/* payoff — their profile card */
+.pcard{margin-top:16px;border:1px solid var(--hk-line);border-radius:22px;padding:16px;background:#fff}
+.pc-top{display:flex;align-items:center;gap:12px}
+.pc-av{width:52px;height:52px;border-radius:50%;background:var(--hk-pink-soft);display:grid;place-items:center;font:800 20px/1 'Figtree',sans-serif;color:var(--hk-pink);flex:none}
+.pc-top b{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.pc-top span{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--hk-txt2);font-weight:600;margin-top:2px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pc-tag{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px;border:1px solid var(--hk-line);font-size:12px;font-weight:600}
+.pc-tag svg{width:12px;height:12px}
+.pc-sec{margin-top:14px;padding-top:12px;border-top:1px solid var(--hk-line)}
+.pc-sec h5{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:800;margin:0 0 8px}
+.prem{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--hk-pink);padding:4px 7px;border-radius:6px}
+.prem svg{width:10px;height:10px}
+.pc-sec .tchips{gap:6px}
+.pc-sec .tc{padding:7px 10px;font-size:12px;cursor:default}
+.pc-note{display:flex;gap:10px;align-items:flex-start;margin-top:12px;background:var(--hk-lav-soft);border-radius:var(--r-ctl);padding:12px 13px;font-size:12.5px;line-height:1.42;color:#2C2D4F}
+.pc-note svg{width:18px;height:18px;flex:none;stroke:var(--hk-lav-ink);fill:none;stroke-width:2;margin-top:1px}
+
+/* paywall */
+.scr--pay .scr-top{padding:52px 20px 0}
+.scr--pay .scr-body{padding:0 20px}
+.scr--pay .scr-foot{padding:10px 20px 26px;border-top:1px solid var(--hk-line);background:#fff}
+.payx{width:30px;height:30px;border-radius:50%;background:var(--hk-chip);display:grid;place-items:center;color:var(--hk-ink)}
+.payx svg{width:13px;height:13px}
+.paytop{display:flex;align-items:center;justify-content:space-between}
+.payhero{display:flex;align-items:center;justify-content:center;margin-top:2px}
+.payhero .pin{position:relative;width:62px;height:62px;padding:3px;margin:0 -7px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.payhero .pin::after{display:none}
+.payhero .pin:nth-child(3){width:76px;height:76px;z-index:2}
+.payh{font-size:25px;line-height:1.12;font-weight:800;letter-spacing:-.025em;text-align:center;margin:12px 0 0}
+.payh .hand{font-family:'Caveat',cursive;font-size:1.3em;color:var(--hk-pink);letter-spacing:0;font-weight:700}
+.paychips{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:9px}
+.paychips span{background:var(--hk-lav-soft);color:var(--hk-lav-ink);font-size:11px;font-weight:700;padding:5px 9px;border-radius:7px}
+.feat{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.feat div{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;line-height:1.3}
+.feat i{width:22px;height:22px;flex:none;border-radius:50%;background:var(--hk-pink-soft);display:grid;place-items:center}
+.feat i svg{width:12px;height:12px;stroke:var(--hk-pink);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.plans{margin-top:14px;display:flex;gap:8px}
+.plan{flex:1;position:relative;border:1.5px solid var(--hk-line);border-radius:14px;padding:16px 6px 11px;text-align:center;background:#fff;transition:.15s;min-width:0}
+.plan b{display:block;font-size:13px;font-weight:700;color:var(--hk-txt2)}
+.plan strong{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em;margin-top:3px}
+.plan span{display:block;font-size:11px;font-weight:600;color:var(--hk-txt2);margin-top:1px}
+.plan.on{border-color:var(--hk-pink);background:#FFF6FA}
+.plan .flag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--hk-pink);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.proof{margin-top:14px;background:var(--hk-bg2);border-radius:var(--r-media);padding:13px 14px}
+.proof .k{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800}
+.proof .k i{width:7px;height:7px;border-radius:50%;background:#20C26B;display:block}
+.proof p{font-size:12.5px;line-height:1.45;color:#3A3A40;margin:7px 0 0}
+.proof p em{display:block;font-style:normal;font-size:11.5px;color:var(--hk-txt2);font-weight:700;margin-top:4px}
+.legal{display:flex;justify-content:center;gap:14px;margin-top:8px}
+.legal a{font-size:11px;color:var(--hk-txt3);text-decoration:none}
+.trust{font-size:12px;font-weight:600;color:var(--hk-txt2);text-align:center;margin:0 0 9px}
+
+/* offer sheet */
+.scr--offer{background:transparent}
+.scr--offer .shade{position:absolute;inset:0;background:rgba(17,17,17,.45)}
+.osheet{position:absolute;left:0;right:0;bottom:0;top:94px;background:#fff;border-radius:26px 26px 0 0;display:flex;flex-direction:column;overflow:hidden}
+.osheet .scr-top{padding:14px 20px 0}
+.osheet .scr-body{padding:0 20px}
+.osheet .scr-foot{padding:10px 20px 26px;border-top:1px solid var(--hk-line)}
+.grab{width:38px;height:5px;border-radius:3px;background:#DADADF;margin:0 auto 8px}
+.otag{display:inline-block;background:var(--hk-lav-soft);color:var(--hk-lav-ink);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:7px}
+.offer-h{font-size:25px;line-height:1.12;font-weight:800;letter-spacing:-.025em;margin:10px 0 0}
+.offer-h .hand{font-family:'Caveat',cursive;font-size:1.3em;color:var(--hk-pink);font-weight:700;letter-spacing:0}
+.offer-sub{font-size:13.5px;line-height:1.45;color:var(--hk-txt2);margin:7px 0 0}
+.tl{margin-top:16px;position:relative;padding-left:4px}
+.tl-i{display:flex;gap:13px;position:relative;padding-bottom:16px}
+.tl-i:last-child{padding-bottom:0}
+.tl-i::before{content:'';position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--hk-line)}
+.tl-i:last-child::before{display:none}
+.tl-i .dt{width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--hk-chip)}
+.tl-i.now .dt{background:var(--hk-pink)}
+.tl-i .dt svg{width:15px;height:15px;stroke:var(--hk-ink);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tl-i.now .dt svg{stroke:#fff}
+.tl-i b{display:block;font-size:14.5px;font-weight:800;padding-top:5px}
+.tl-i span{display:block;font-size:12.5px;line-height:1.4;color:var(--hk-txt2);margin-top:2px}
+.ocard{margin-top:16px;border:1.5px solid var(--hk-pink);background:#FFF6FA;border-radius:14px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ocard b{display:block;font-size:15px;font-weight:800}
+.ocard span{display:block;font-size:12px;color:var(--hk-txt2);font-weight:600;margin-top:2px}
+.ocard .pr{text-align:right}
+.ocard .pr s{font-size:12px;color:var(--hk-txt3);font-weight:600}
+.ocard .pr b{color:var(--hk-pink)}
+
+/* location */
+.locmap{position:relative;height:300px;margin-top:18px;border-radius:24px;overflow:hidden;background:var(--hk-pink-soft)}
+.locmap .street{position:absolute;background:#fff;opacity:.85}
+.locmap .pin{width:58px;height:58px}
+.locmap .you{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--hk-pink);border:4px solid #fff;box-shadow:0 0 0 12px rgba(254,46,119,.18)}
+.why{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.why div{display:flex;gap:11px;font-size:13.5px;line-height:1.4;color:#33333A}
+.why svg{width:20px;height:20px;flex:none;stroke:var(--hk-pink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.why b{color:var(--hk-ink)}
+
+/* chips under the phone */
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:470px;margin:0 auto}
+.chip{padding:7px 13px;border-radius:20px;border:1px solid #2C3136;background:#1B1F22;font:600 12px/1 'Figtree',sans-serif;color:#B9C1C8;transition:.14s}
+.chip:hover{color:#E8ECEF;border-color:#3D444A}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.offer{border-color:var(--accent);color:var(--accent-lift)}
+.chip.offer.on{color:#fff}
+.chiphint{text-align:center;font-size:11px;color:var(--ink3);margin:0;max-width:430px}
+
+/* ============ the short panel ============ */
+.pn{padding:30px 30px 60px}
+.pn-n{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.pn-n.ctx{color:var(--panel-muted)}
+.pn-t{font-size:23px;line-height:1.18;font-weight:700;letter-spacing:-.028em;margin:8px 0 0;color:var(--panel-ink)}
+.pn-hyp{font-size:15px;line-height:1.62;color:#2E353B;margin:16px 0 0}
+.pn-hyp b{font-weight:700;color:var(--panel-ink)}
+.pn-out{margin-top:22px;border-top:1px solid var(--panel-line);padding-top:18px}
+.pn-out .lab{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--panel-muted)}
+.pn-out .v{font-size:31px;font-weight:700;letter-spacing:-.035em;color:var(--accent-ink);margin-top:7px;line-height:1}
+.pn-kept{margin-top:22px;font-size:12.5px;line-height:1.55;color:var(--panel-muted)}
+.pn-kept b{color:#2E353B;font-weight:700}
+.pn-foot{font-size:11.5px;line-height:1.55;color:var(--panel-muted);border-top:1px solid var(--panel-line);padding-top:14px;margin-top:26px}
+.pn-sep{height:1px;background:var(--panel-line);margin:26px 0}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-in">
+    <div class="nav-brand">
+      <span class="mk"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" fill="#fff"/></svg></span>
+      <b>Growth Audit</b><span>· Hiki</span>
+    </div>
+    <div class="nav-links">
+      <button class="on" data-view="over">Overview</button>
+      <button data-view="proto">Prototype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Growth Audit · October 2026</div>
+    <h1>Hiki</h1>
+    <p class="lede">Five ideas to unlock more revenue from the traffic you already have.</p>
+    <div class="meta">Prepared by <b>Adapty</b> · based on your App Store listing, your website and your in-app design</div>
+    <div class="stats">
+      <div class="stat"><b>30,000+</b><span>apps run subscriptions<br>on Adapty</span></div>
+      <div class="stat"><b>5</b><span>ideas, each rebuilt<br>as a working screen</span></div>
+      <div class="stat"><b>0</b><span>design changes<br>to your art direction</span></div>
+    </div>
+    <div class="fb">
+      <div class="fb-k">Built in Adapty Flow Builder</div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Millions of dollars</b> in subscription revenue pass through Flow Builder every month.</p>
+      </div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Nearly 500 apps</b> actively build their paywalls and onboarding in it — plenty of them past $100K MRR.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">What this is</div>
+    <h2>We looked at Hiki the way a new member does, then rebuilt the moments we think are leaving money on the table.</h2>
+    <p class="body">Adapty powers subscriptions for <b>30,000+ apps</b>, so we see what moves conversion and revenue across the market, not inside one app. We pointed that at Hiki: read your App Store listing and your in-app purchase list, read your site, studied your screens, and looked for gaps between what you already have and what you show people before they decide.</p>
+    <p class="body">What follows is five ideas, not fifteen. Each is a hypothesis you can A/B test, and each is built into a clickable prototype so you can see it rather than imagine it. <b>The prototype uses your design, not ours.</b></p>
+    <div class="notes">
+      <div class="note">
+        <h4>We did not redesign your app</h4>
+        <p>Every screen in the prototype is yours: your pink and lavender, your handwritten headlines, your trait chips, your profile card, your photography. Only the order changed, plus a few things you already own but do not show at the moment of decision.</p>
+      </div>
+      <div class="note">
+        <h4>You may have tested some of this</h4>
+        <p>We are working from the outside, so we cannot see your experiment history. If one of these is something you have already run, tell us and we will go deeper on the rest rather than repeat it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">The five ideas</div>
+    <h2>Ranked by what we would test first.</h2>
+    <p class="body">Each one links straight to the screen in the prototype.</p>
+
+    <div class="ideas">
+      <button class="idea" data-jump="offer">
+        <span class="no">01</span>
+        <span>
+          <h3>Offer the $34 trial to people who say no</h3>
+          <p>Your store lists Premium at $44 a month, and also a month at $34 with a 7-day trial. One App Store review calls the $44 price prohibitive. Show the $34 trial to the people who close the paywall, not to everyone.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>ARPU +10–15%</b><span>second chance</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">02</span>
+        <span>
+          <h3>Name what they came for on the paywall</h3>
+          <p>Hiki has three doors: love, friends and community. Someone looking for friends and someone looking for a partner should not read the same headline. Ask once, then say it back above the price.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +15–20%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="payoff">
+        <span class="no">03</span>
+        <span>
+          <h3>Show people their profile before the price</h3>
+          <p>You match on special interests and personality, and Premium is what unlocks the traits, support needs and communication profile. Let people pick those first, then see the profile they just built, with the Premium part marked.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">04</span>
+        <span>
+          <h3>Put your community next to the price</h3>
+          <p>Nearly 200,000 active neurodivergent members, and members writing “Finally a neurodivergent home”. Both are on your listing and your site. Neither needs to wait until after someone pays.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="location">
+        <span class="no">05</span>
+        <span>
+          <h3>Ask for location after the paywall</h3>
+          <p>Location matters to Hiki: matches are local and you use it for safety checks. A system prompt is easy to dismiss and pulls attention right before a purchase. Ask after, with a screen that says why.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+    </div>
+
+    <div class="band">
+      <div class="txt">
+        <div class="lab">Potential outcome</div>
+        <p>Together, these five move the same funnel at three points: what people tell you, what you show them before the price, and what happens when they say no.</p>
+      </div>
+      <div class="nums">
+        <div><b>+25%</b><span>CR to purchase</span></div>
+        <div><b>+30%</b><span>ARPU</span></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <button class="bigbtn" data-view="proto">Open the prototype
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="wrap">
+    Impact ranges are Adapty's expected effect from teardowns and A/B tests across subscription apps — not measured lift for Hiki. Every price, member count, quote and feature here and in the prototype comes from Hiki's own App Store listing, in-app purchase list and website.
+  </div>
+</div>
+</div><!-- /view-over -->
+
+<!-- ======================= PROTOTYPE ======================= -->
+<div class="view" id="view-proto">
+<div class="stage">
+  <div class="phonecol">
+    <div class="phone dark" id="phone">
+      <div class="phone-in">
+        <div class="island"></div>
+        <div class="sbar">
+          <span>9:41</span>
+          <span class="glyphs">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7.5" width="3" height="3.5" rx="1"/><rect x="4.5" y="5.5" width="3" height="5.5" rx="1"/><rect x="9" y="3" width="3" height="8" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.5 5.6 7.9a3.4 3.4 0 0 1 4.8 0L8 10.5Zm0-5.6a6.4 6.4 0 0 0-4.5 1.9L1.7 4.9a9 9 0 0 1 12.6 0l-1.8 1.9A6.4 6.4 0 0 0 8 4.9Z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="20" height="10.8" rx="3" stroke="currentColor" stroke-opacity=".5"/><rect x="2.2" y="2.2" width="16.5" height="7.6" rx="1.8" fill="currentColor"/><path d="M22.3 4.1v3.8a2 2 0 0 0 0-3.8Z" fill="currentColor" fill-opacity=".5"/></svg>
+          </span>
+        </div>
+        <div class="homebar"></div>
+        <div class="screenwrap">
+
+<!-- WELCOME -->
+<section class="scr scr--pink" data-id="welcome" data-dark="1">
+  <div class="scr-top"><img class="wm" src="img/logo.png" alt="hiki"></div>
+  <div class="scr-body dock">
+    <h1 class="wel-h">Find <u>your</u> people</h1>
+    <div class="map" aria-hidden="true">
+      <div class="ring" style="inset:-6px"></div>
+      <div class="ring" style="inset:-6px -40px 40px 30px"></div>
+      <div class="disc"></div>
+      <div class="pin" style="width:92px;height:92px;left:98px;top:-4px"><span><img src="img/f1.jpg" alt=""></span></div>
+      <div class="pin" style="width:72px;height:72px;left:226px;top:52px"><span><img src="img/f2.jpg" alt=""></span></div>
+      <div class="pin" style="width:68px;height:68px;left:-8px;top:118px"><span><img src="img/f3.jpg" alt=""></span></div>
+      <div class="pin" style="width:64px;height:64px;left:212px;top:172px"><span><img src="img/f4.jpg" alt=""></span></div>
+      <div class="pin" style="width:72px;height:72px;left:100px;top:208px"><span><img src="img/f5.jpg" alt=""></span></div>
+    </div>
+    <p class="wel-sub">Built by and for<br>Neurodivergent adults.<br>Nothing about us,<br>without us.</p>
+  </div>
+  <div class="scr-foot">
+    <p class="wel-proof"><i></i>Nearly 200,000 active neurodivergent members</p>
+    <button class="btn" data-go="intent">Join Hiki for free</button>
+    <p class="helper" style="margin:11px 0 0">Already a member? <b style="color:#fff">Log in</b></p>
+  </div>
+</section>
+
+<!-- INTENT -->
+<section class="scr" data-id="intent">
+  <div class="scr-top">
+    <div class="scr-nav">
+      <button class="scr-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+      <div class="scr-prog"><i style="width:25%"></i></div>
+    </div>
+    <h2 class="scr-h">What brings you to <span class="hand">Hiki</span>?</h2>
+    <p class="scr-sub">Pick as many as you like. You can change it later.</p>
+  </div>
+  <div class="scr-body">
+    <div class="rows" id="intentList">
+      <button class="ro" data-v="love"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FE2E77" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><span>Find love<small>Date someone who gets you</small></span><span class="bx"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+      <button class="ro" data-v="friends"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#7E80BA" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="9" r="3.2"/><circle cx="16.5" cy="10" r="2.6"/><path d="M3.5 19c.6-3 3-4.6 5.5-4.6s4.9 1.6 5.5 4.6M14.5 15c2.6-.4 4.8.9 5.5 3.6"/></svg></span><span>Find friends<small>Bond over shared experiences</small></span><span class="bx"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+      <button class="ro" data-v="community"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span><span>Find community<small>Post, react and feel less alone</small></span><span class="bx"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+    </div>
+  </div>
+  <div class="scr-foot"><button class="btn" id="intentBtn" data-go="identity">Continue</button></div>
+</section>
+
+<!-- IDENTITY -->
+<section class="scr" data-id="identity">
+  <div class="scr-top">
+    <div class="scr-nav">
+      <button class="scr-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+      <div class="scr-prog"><i style="width:50%"></i></div>
+    </div>
+    <h2 class="scr-h">How do you identify?</h2>
+    <p class="scr-sub">Recently diagnosed, self-diagnosed or exploring. Whichever way, we love to see it.</p>
+  </div>
+  <div class="scr-body">
+    <div class="tsec"><div class="tchips" id="idChips">
+      <button class="tc" data-v="Autism">Autism</button><button class="tc" data-v="ADHD">ADHD</button><button class="tc" data-v="AuDHD">AuDHD</button>
+      <button class="tc" data-v="Tourette’s">Tourette’s</button><button class="tc" data-v="Dyslexia">Dyslexia</button><button class="tc" data-v="OCD">OCD</button>
+      <button class="tc" data-v="Other neurodivergence">Other neurodivergence</button><button class="tc" data-v="Still exploring">Still exploring</button>
+    </div></div>
+    <div class="tsec"><h4>Also me</h4><div class="tchips" id="idChips2">
+      <button class="tc" data-v="LGBTQIA+">LGBTQIA+</button><button class="tc" data-v="Non-binary">Non-binary</button><button class="tc" data-v="Gender non-conforming">Gender non-conforming</button>
+    </div></div>
+  </div>
+  <div class="scr-foot"><button class="btn" data-go="traits">Continue</button></div>
+</section>
+
+<!-- TRAITS -->
+<section class="scr" data-id="traits">
+  <div class="scr-top">
+    <div class="scr-nav">
+      <button class="scr-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+      <div class="scr-prog"><i style="width:75%"></i></div>
+    </div>
+    <svg class="brain" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 0 0-5.6-1.4A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.6A3 3 0 0 0 8 19.5a3 3 0 0 0 4-1.2"/><path d="M12 5a3 3 0 0 1 5.6-1.4A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.6 3 3 0 0 1-3.5 5.4 3 3 0 0 1-4-1.2V5Z"/></svg>
+    <h2 class="scr-h" style="margin-top:8px">My divergent traits</h2>
+    <p class="scr-sub">So matches know how you talk and what helps. <span class="picked" id="traitCount"></span></p>
+  </div>
+  <div class="scr-body">
+    <div class="tsec"><h4>Traits</h4><div class="tchips" data-group="traits">
+      <button class="tc" data-v="High Energy">High Energy</button><button class="tc" data-v="Passionate">Passionate</button><button class="tc" data-v="Rule-Follower">Rule-Follower</button><button class="tc" data-v="Strong Sense of Justice">Strong Sense of Justice</button>
+    </div></div>
+    <div class="tsec"><h4>Communication</h4><div class="tchips" data-group="traits">
+      <button class="tc" data-v="Verbal Processor">Verbal Processor</button><button class="tc" data-v="Making Playlists">Making Playlists</button><button class="tc" data-v="Infodumping">Infodumping</button><button class="tc" data-v="Long Paragraphs">Long Paragraphs</button><button class="tc" data-v="Casual Conversation">Casual Conversation</button>
+    </div></div>
+    <div class="tsec"><h4>Support needs</h4><div class="tchips" data-group="traits">
+      <button class="tc" data-v="Attention Variation">Attention Variation</button><button class="tc" data-v="Fidget Toys">Fidget Toys</button><button class="tc" data-v="Routines">Routines</button><button class="tc" data-v="COVID-Conscious">COVID-Conscious</button>
+    </div></div>
+    <div style="height:12px"></div>
+  </div>
+  <div class="scr-foot"><button class="btn" data-go="interests">Continue</button></div>
+</section>
+
+<!-- INTERESTS -->
+<section class="scr" data-id="interests">
+  <div class="scr-top">
+    <div class="scr-nav">
+      <button class="scr-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+      <div class="scr-prog"><i style="width:100%"></i></div>
+    </div>
+    <h2 class="scr-h">Your special <span class="hand">interests</span></h2>
+    <p class="scr-sub">Spend less time explaining your quirks and more time bonding over them.</p>
+  </div>
+  <div class="scr-body">
+    <div class="tsec"><div class="tchips" id="intChips">
+      <button class="tc" data-v="Literature & writing">📖 Literature &amp; writing</button><button class="tc" data-v="Video games">🎮 Video games</button><button class="tc" data-v="Trains">🚆 Trains</button>
+      <button class="tc" data-v="Anime">🍥 Anime</button><button class="tc" data-v="Music">🎧 Music</button><button class="tc" data-v="Animals">🐾 Animals</button>
+      <button class="tc" data-v="Space">🪐 Space</button><button class="tc" data-v="Art & drawing">🎨 Art &amp; drawing</button><button class="tc" data-v="History">🏛️ History</button>
+      <button class="tc" data-v="Coding">💻 Coding</button><button class="tc" data-v="Nature">🌿 Nature</button><button class="tc" data-v="Tabletop games">🎲 Tabletop games</button>
+    </div></div>
+  </div>
+  <div class="scr-foot"><button class="btn" data-go="loader">Find my people</button></div>
+</section>
+
+<!-- LOADER -->
+<section class="scr scr--load" data-id="loader" data-dark="1">
+  <div class="scr-top" style="padding-top:0"></div>
+  <div class="scr-body">
+    <div class="loadwrap">
+      <div class="orbit">
+        <div class="o"><img src="img/f2.jpg" alt=""><img src="img/f4.jpg" alt=""><img src="img/f5.jpg" alt=""></div>
+        <div class="core"><img src="img/logo.png" alt=""></div>
+      </div>
+      <h2 class="load-h">Finding your people…</h2>
+      <div class="load-steps" id="loadSteps">
+        <div class="lstep"><span class="dot"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"></span></div>
+        <div class="lstep"><span class="dot"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"></span></div>
+        <div class="lstep"><span class="dot"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><span class="t"></span></div>
+      </div>
+      <div class="quote"><p id="qText"></p><b id="qWho"></b></div>
+      <div class="qdots" id="qDots"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYOFF -->
+<section class="scr" data-id="payoff">
+  <div class="scr-top">
+    <h2 class="scr-h" style="margin-top:6px">Here’s how people <span class="hand">see you</span></h2>
+    <p class="scr-sub">Built from what you just told us. Add photos next.</p>
+  </div>
+  <div class="scr-body">
+    <div class="pcard">
+      <div class="pc-top">
+        <div class="pc-av">Y</div>
+        <div><b>You</b><span><svg width="12" height="12" viewBox="0 0 24 24" fill="#20C26B"><circle cx="12" cy="12" r="6"/></svg>Active now</span></div>
+      </div>
+      <div class="pc-tags" id="pcTags"></div>
+      <div class="pc-sec"><h5>Special interests</h5><div class="tchips" id="pcInts"></div></div>
+      <div class="pc-sec"><h5>My divergent traits <span class="prem"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2 15 9l7 .8-5.3 4.8 1.6 7.1L12 18l-6.3 3.7 1.6-7.1L2 9.8 9 9z"/></svg>Premium</span></h5><div class="tchips" id="pcTraits"></div></div>
+    </div>
+    <div class="pc-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg><span id="pcNote"></span></div>
+    <div style="height:12px"></div>
+  </div>
+  <div class="scr-foot"><button class="btn" data-go="paywall">Continue</button></div>
+</section>
+
+<!-- PAYWALL -->
+<section class="scr scr--pay" data-id="paywall">
+  <div class="scr-top">
+    <div class="paytop">
+      <img class="wm dark" src="img/logo.png" alt="hiki" style="height:22px">
+      <button class="payx" id="payClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="scr-body">
+    <div class="payhero">
+      <div class="pin"><span><img src="img/f3.jpg" alt=""></span></div>
+      <div class="pin"><span><img src="img/f2.jpg" alt=""></span></div>
+      <div class="pin"><span><img src="img/f1.jpg" alt=""></span></div>
+      <div class="pin"><span><img src="img/f5.jpg" alt=""></span></div>
+      <div class="pin"><span><img src="img/f4.jpg" alt=""></span></div>
+    </div>
+    <h2 class="payh" id="payH"></h2>
+    <div class="paychips" id="payChips"></div>
+    <div class="feat" id="payFeat"></div>
+    <div class="plans" id="planList">
+      <button class="plan" data-v="w"><b>1 week</b><strong>$19.95</strong><span>per week</span></button>
+      <button class="plan" data-v="3m"><span class="flag">SAVE 32%</span><b>3 months</b><strong>$90</strong><span>$30/mo</span></button>
+      <button class="plan" data-v="m"><b>1 month</b><strong>$44</strong><span>per month</span></button>
+    </div>
+    <div class="proof">
+      <div class="k"><i></i>Nearly 200,000 active ND members</div>
+      <p id="payQuote"></p>
+    </div>
+    <div style="height:10px"></div>
+  </div>
+  <div class="scr-foot">
+    <p class="trust" id="payTrust"></p>
+    <button class="btn" id="payCta"></button>
+    <div class="legal"><a>Restore</a><a>Terms</a><a>Privacy</a></div>
+  </div>
+</section>
+
+<!-- OFFER (sheet) -->
+<section class="scr sheet scr--offer" data-id="offer">
+  <div class="shade"></div>
+  <div class="osheet">
+    <div class="scr-top">
+      <div class="grab"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="otag">Before you go</span>
+        <button class="payx" id="offClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <h2 class="offer-h">Try Premium <span class="hand">free</span> for 7 days</h2>
+      <p class="offer-sub" id="offSub"></p>
+    </div>
+    <div class="scr-body">
+      <div class="tl">
+        <div class="tl-i now"><span class="dt"><svg viewBox="0 0 24 24"><path d="M5 11V8a7 7 0 0 1 14 0v3"/><rect x="4" y="11" width="16" height="10" rx="2"/></svg></span><div><b>Today</b><span id="tlToday"></span></div></div>
+        <div class="tl-i"><span class="dt"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><div><b>Days 1–7</b><span>See who liked you, send Sparks, message matches with video. Cancel anytime in Settings.</span></div></div>
+        <div class="tl-i"><span class="dt"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><b>Day 7</b><span>Your trial ends and Premium continues at $34 a month.</span></div></div>
+      </div>
+      <div class="ocard">
+        <div><b>1 month · 7-day free trial</b><span>Then $34/month</span></div>
+        <div class="pr"><s>$44</s><b>$34</b></div>
+      </div>
+      <div style="height:8px"></div>
+    </div>
+    <div class="scr-foot">
+      <p class="trust">No payment today · cancel anytime before day 7</p>
+      <button class="btn" id="offerCta" style="background:var(--hk-pink)">Start my free week</button>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="scr" data-id="location">
+  <div class="scr-top">
+    <h2 class="scr-h" style="margin-top:6px">Find people <span class="hand">near you</span></h2>
+    <p class="scr-sub">Hiki uses your location to show you nearby members and to keep the community safe.</p>
+  </div>
+  <div class="scr-body">
+    <div class="locmap" aria-hidden="true">
+      <div class="street" style="left:0;right:0;top:92px;height:10px;transform:rotate(-12deg)"></div>
+      <div class="street" style="left:0;right:0;top:210px;height:8px;transform:rotate(8deg)"></div>
+      <div class="street" style="top:0;bottom:0;left:120px;width:9px;transform:rotate(14deg)"></div>
+      <div class="street" style="top:0;bottom:0;left:250px;width:7px;transform:rotate(-6deg)"></div>
+      <div class="you"></div>
+      <div class="pin" style="left:34px;top:40px"><span><img src="img/f1.jpg" alt=""></span></div>
+      <div class="pin" style="left:232px;top:58px"><span><img src="img/f5.jpg" alt=""></span></div>
+      <div class="pin" style="left:58px;top:194px"><span><img src="img/f4.jpg" alt=""></span></div>
+      <div class="pin" style="left:224px;top:200px"><span><img src="img/f3.jpg" alt=""></span></div>
+    </div>
+    <div class="why">
+      <div><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><b>Matches near you first.</b> You choose how far to look.</span></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Safety first.</b> Location, age and ID checks keep Hiki for real people.</span></div>
+    </div>
+  </div>
+  <div class="scr-foot">
+    <button class="btn" data-go="welcome">Allow location</button>
+    <button class="btn ghost" data-go="welcome">Not now</button>
+  </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <p class="chiphint">Jump to any screen — answers already filled in.</p>
+  </div>
+  <div class="panelcol"><div class="pn" id="panel"></div></div>
+</div>
+</div><!-- /view-proto -->
+
+<script>
+var S = { intent:['love','friends'], identity:['AuDHD'], also:['LGBTQIA+'],
+          traits:['Infodumping','Long Paragraphs','Routines'], interests:['Video games','Trains'], plan:'3m' };
+var INTENT = {love:'Love', friends:'Friends', community:'Community'};
+var PLAN = { w:{label:'1 week', cta:'Continue — $19.95/week', trust:'Billed weekly · cancel anytime in Settings'},
+             '3m':{label:'3 months', cta:'Continue — $90 for 3 months', trust:'$30/month, billed every 3 months · cancel anytime'},
+             m:{label:'1 month', cta:'Continue — $44/month', trust:'Billed monthly · cancel anytime in Settings'} };
+var QUOTES = [
+  ['Your app made me feel less alone, less weird. More love, more happiness. I am so so grateful.','Curly S., Hiki member'],
+  ['Finally a neurodivergent home :)','Bibi, Hiki member'],
+  ['Thank you for establishing and growing and maintaining this community for us all.','Jeff, Hiki member']
+];
+var FEATS = {
+  love:['See everyone who has liked you','Send a Spark to get noticed faster','Add a personal message to match requests'],
+  friends:['See everyone who wants to be friends','Add a personal message to friend requests','View new profiles in other cities'],
+  community:['See everyone who has liked you','Send video messages to your matches','Respond to prompts with text, audio or video']
+};
+var COMMON = ['Show your traits, support needs and communication style','Boost your profile and skip the queue'];
+
+var ORDER = ['welcome','intent','identity','traits','interests','loader','payoff','paywall','offer','location'];
+var LABEL = {welcome:'Welcome',intent:'Intent',identity:'Identity',traits:'Traits',interests:'Interests',
+             loader:'Loader',payoff:'Profile',paywall:'Paywall',offer:'Offer on close',location:'Location'};
+var scr={}, hist=[], cur='welcome', loadTimers=[];
+document.querySelectorAll('.scr').forEach(function(s){ scr[s.dataset.id]=s; });
+
+function joinNice(a){ if(a.length<2) return a.join(''); return a.slice(0,-1).join(', ')+' & '+a[a.length-1]; }
+function primaryIntent(){ return S.intent.indexOf('love')>-1?'love':(S.intent[0]||'friends'); }
+
+function setDark(){ document.getElementById('phone').classList.toggle('dark', !!scr[cur].dataset.dark); }
+function go(id,opts){
+  opts=opts||{}; if(id===cur) return;
+  var from=scr[cur], to=scr[id];
+  if(!opts.back) hist.push(cur);
+  if(from){ from.classList.remove('is-active');
+    if(!to.classList.contains('sheet') && !from.classList.contains('sheet')) from.classList.add('is-past'); }
+  Object.keys(scr).forEach(function(k){ if(k!==id&&k!==cur) scr[k].classList.remove('is-active'); });
+  if(to.classList.contains('sheet') && from) from.classList.add('is-active');
+  to.classList.remove('is-past'); to.classList.add('is-active');
+  cur=id; syncScreen(); paintChips(); paintPanel(); clearLoad(); setDark();
+  if(id==='loader') runLoader();
+}
+function back(){
+  if(!hist.length) return;
+  var prev=hist.pop();
+  scr[cur].classList.remove('is-active');
+  scr[prev].classList.remove('is-past'); scr[prev].classList.add('is-active');
+  cur=prev; paintChips(); paintPanel(); clearLoad(); setDark();
+}
+function jump(id){
+  var i=ORDER.indexOf(id);
+  Object.keys(scr).forEach(function(k){ scr[k].classList.add('nofx'); scr[k].classList.remove('is-active','is-past'); });
+  hist=ORDER.slice(0,i<0?0:i);
+  if(id==='offer'){ scr.paywall.classList.add('is-active'); hist=ORDER.slice(0,ORDER.indexOf('paywall')+1); }
+  if(id==='location'){ hist=ORDER.slice(0,ORDER.indexOf('paywall')+1); }
+  scr[id].classList.add('is-active'); cur=id; clearLoad();
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    Object.keys(scr).forEach(function(k){ scr[k].classList.remove('nofx'); }); }); });
+  syncScreen(); paintChips(); paintPanel(); setDark();
+  if(id==='loader') runLoader();
+}
+function paintChips(){
+  var c=document.getElementById('chips');
+  if(!c.childElementCount){
+    ORDER.forEach(function(id){
+      var b=document.createElement('button'); b.className='chip'+(id==='offer'?' offer':''); b.textContent=LABEL[id];
+      b.dataset.id=id; b.onclick=function(){ jump(id); }; c.appendChild(b);
+    });
+  }
+  c.querySelectorAll('.chip').forEach(function(b){ b.classList.toggle('on', b.dataset.id===cur); });
+}
+
+function tag(txt,icon){ return '<span class="pc-tag">'+(icon||'')+txt+'</span>'; }
+function syncScreen(){
+  document.querySelectorAll('#intentList .ro').forEach(function(b){ b.classList.toggle('on', S.intent.indexOf(b.dataset.v)>-1); });
+  document.getElementById('intentBtn').disabled = !S.intent.length;
+  document.querySelectorAll('#idChips .tc').forEach(function(b){ b.classList.toggle('on', S.identity.indexOf(b.dataset.v)>-1); });
+  document.querySelectorAll('#idChips2 .tc').forEach(function(b){ b.classList.toggle('on', S.also.indexOf(b.dataset.v)>-1); });
+  document.querySelectorAll('[data-group="traits"] .tc').forEach(function(b){ b.classList.toggle('on', S.traits.indexOf(b.dataset.v)>-1); });
+  document.querySelectorAll('#intChips .tc').forEach(function(b){ b.classList.toggle('on', S.interests.indexOf(b.dataset.v)>-1); });
+  var nt=S.traits.length;
+  document.getElementById('traitCount').textContent = nt ? (nt+' picked') : '';
+
+  var intents=S.intent.map(function(k){ return INTENT[k]; });
+  var ints=S.interests.length?S.interests:['your interests'];
+  var st=document.querySelectorAll('#loadSteps .lstep .t');
+  st[0].textContent='Looking for '+joinNice(intents).toLowerCase()+' near you';
+  st[1].textContent='Matching on '+joinNice(ints.slice(0,2));
+  st[2].textContent=nt ? ('Finding people who get '+S.traits[0].toLowerCase()) : 'Finding people who talk like you';
+
+  var heart='<svg viewBox="0 0 24 24" fill="#FE2E77"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>';
+  var tags=S.intent.map(function(k){ return tag('Looking for '+INTENT[k].toLowerCase(), heart); });
+  S.identity.concat(S.also).forEach(function(v){ tags.push(tag(v)); });
+  document.getElementById('pcTags').innerHTML=tags.join('');
+  document.getElementById('pcInts').innerHTML=S.interests.map(function(v){ return '<span class="tc">'+v+'</span>'; }).join('') || '<span class="tc">Add an interest</span>';
+  document.getElementById('pcTraits').innerHTML=S.traits.map(function(v){ return '<span class="tc on">'+v+'</span>'; }).join('') || '<span class="tc">Add your traits</span>';
+  document.getElementById('pcNote').textContent = nt
+    ? ('Your '+nt+' trait'+(nt===1?'':'s')+' — like “'+S.traits[0]+'” — show on your profile with Premium, so matches know how you communicate before the first message.')
+    : 'With Premium, your traits, support needs and communication style show on your profile.';
+
+  var p=primaryIntent();
+  var H={love:'Find <span class="hand">love</span> that gets you',friends:'Find <span class="hand">friends</span> who get you',community:'Find <span class="hand">your</span> people faster'};
+  document.getElementById('payH').innerHTML=H[p];
+  var chips=S.intent.map(function(k){ return INTENT[k]; }).concat(S.identity).concat(S.interests.slice(0,1));
+  document.getElementById('payChips').innerHTML=chips.map(function(c){ return '<span>'+c+'</span>'; }).join('');
+  var f=FEATS[p].slice(0,2).concat(COMMON);
+  var tick='<i><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></i>';
+  document.getElementById('payFeat').innerHTML=f.map(function(x){ return '<div>'+tick+x+'</div>'; }).join('');
+  var q=QUOTES[p==='love'?0:(p==='friends'?2:1)];
+  document.getElementById('payQuote').innerHTML='“'+q[0]+'”<em>— '+q[1]+'</em>';
+  document.querySelectorAll('#planList .plan').forEach(function(b){ b.classList.toggle('on',b.dataset.v===S.plan); });
+  document.getElementById('payCta').textContent=PLAN[S.plan].cta;
+  document.getElementById('payTrust').textContent=PLAN[S.plan].trust;
+
+  document.getElementById('offSub').textContent='Not ready for '+(S.plan==='w'?'a weekly plan':(S.plan==='m'?'$44 a month':'3 months'))+'? Try everything first — and if you stay, it’s $34 a month, not $44.';
+  document.getElementById('tlToday').textContent='Premium unlocks. Your '+(nt?nt+' traits':'traits')+' go live on your profile.';
+}
+
+function clearLoad(){ loadTimers.forEach(clearTimeout); loadTimers=[]; }
+function runLoader(){
+  var steps=document.querySelectorAll('#loadSteps .lstep');
+  steps.forEach(function(s){ s.classList.remove('on'); });
+  function showQuote(i){
+    document.getElementById('qText').textContent='“'+QUOTES[i][0]+'”';
+    document.getElementById('qWho').textContent='— '+QUOTES[i][1];
+    document.querySelectorAll('#qDots i').forEach(function(d,n){ d.classList.toggle('on',n===i); });
+  }
+  showQuote(0);
+  steps.forEach(function(s,i){ loadTimers.push(setTimeout(function(){ s.classList.add('on'); },700+i*900)); });
+  [1,2].forEach(function(i){ loadTimers.push(setTimeout(function(){ showQuote(i); },1700+(i-1)*1600)); });
+  loadTimers.push(setTimeout(function(){ if(cur==='loader') go('payoff'); },5000));
+}
+
+function toggleIn(arr,v){ var i=arr.indexOf(v); if(i>-1) arr.splice(i,1); else arr.push(v); }
+document.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ go(b.dataset.go); }); });
+document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
+document.querySelectorAll('#intentList .ro').forEach(function(b){ b.addEventListener('click',function(){ toggleIn(S.intent,b.dataset.v); syncScreen(); }); });
+document.querySelectorAll('#idChips .tc').forEach(function(b){ b.addEventListener('click',function(){ toggleIn(S.identity,b.dataset.v); syncScreen(); }); });
+document.querySelectorAll('#idChips2 .tc').forEach(function(b){ b.addEventListener('click',function(){ toggleIn(S.also,b.dataset.v); syncScreen(); }); });
+document.querySelectorAll('[data-group="traits"] .tc').forEach(function(b){ b.addEventListener('click',function(){ toggleIn(S.traits,b.dataset.v); syncScreen(); }); });
+document.querySelectorAll('#intChips .tc').forEach(function(b){ b.addEventListener('click',function(){ toggleIn(S.interests,b.dataset.v); syncScreen(); }); });
+document.querySelectorAll('#planList .plan').forEach(function(b){ b.addEventListener('click',function(){ S.plan=b.dataset.v; syncScreen(); }); });
+document.getElementById('payClose').addEventListener('click',function(){ go('offer'); });
+document.getElementById('offClose').addEventListener('click',function(){ go('location'); });
+document.getElementById('payCta').addEventListener('click',function(){ go('location'); });
+document.getElementById('offerCta').addEventListener('click',function(){ go('location'); });
+</script>
+<script>
+/* ---- the short panel: hypothesis + potential outcome, nothing else ---- */
+var PANEL = {
+welcome:{ctx:true,t:'Find your people',
+ kept:'Your pink, your white wordmark, your handwritten “Find your people”, the map with member photos in white pins, and your “Nothing about us, without us” line. The member count from your listing sits above the button — idea 04 starting early.'},
+intent:{ctx:true,t:'What brings you to Hiki?',
+ kept:'Your three doors — love, friends, community — in your words. The answer is used three times later: the loader, the profile and the paywall headline.'},
+identity:{ctx:true,t:'How do you identify?',
+ kept:'Every identity your listing names, in your grey chip with the lavender selected state. Nothing removed, nothing filtered.'},
+traits:{ctx:true,t:'My divergent traits',
+ kept:'Your trait picker exactly: the brain mark, the four groups, your own chip labels, grey to lavender on select. It moves earlier so the profile can use it before the price.'},
+interests:{ctx:true,t:'Your special interests',
+ kept:'Your chip control again, and your own line “spend less time explaining your quirks and more time bonding over them” as the subtitle.'},
+loader:{n:3,t:'Show people their profile before the price',
+ hyp:'Try naming their answers back while you search, <b>because you really do match on interests and personality, and people should see that happen</b>. Three quotes from your own site run underneath.',
+ kept:'Your lavender, your white cards, your handwritten headline, member photos from your store screenshots.',
+ out:'CR +10–15%'},
+payoff:{n:3,t:'Show people their profile before the price',
+ hyp:'Try showing the profile their answers built, with the traits section marked Premium, <b>because the traits, support needs and communication profile is one of the things Premium unlocks</b>. Nothing invented: every chip is something they picked.',
+ kept:'Your profile card: name, active dot, “Looking for love” tag with the pink heart, chip rows, the lavender trait chips.',
+ out:'CR +10–15%'},
+paywall:{n:2,t:'Name what they came for on the paywall',
+ hyp:'Try a headline and benefit list that follow the door they picked, <b>because someone looking for friends and someone looking for love are buying different things</b>. Change the intent screen and this headline rewrites.',
+ hyp2:'Try putting your member count and a member’s own words beside the plans, <b>because both already exist on your listing and site and do their best work at the moment of the price</b>. The 32% is plain arithmetic from your $90 and $44 store prices.',
+ n2:4, out2:'CR +10–15%',
+ kept:'Your white surface, black button, pink accents, handwritten word in the headline, and your Premium feature list as written on your listing. Prices are your store prices.',
+ out:'CR +15–20%'},
+offer:{n:1,t:'Offer the $34 trial to people who say no',
+ hyp:'Try your existing 1-month, 7-day-trial SKU at $34 when the paywall is closed, <b>because a reviewer calls $44 prohibitive and closing the paywall today is a dead end</b>. Both prices are on your store listing, so the $44 → $34 is real, not a made-up discount.',
+ kept:'Your sheet style, your pink, your lavender tag, your feature wording. No countdown, because there is no deadline.',
+ out:'ARPU +10–15%'},
+location:{n:5,t:'Ask for location after the paywall',
+ hyp:'Try asking for location here, with a screen that says why, <b>because a system prompt in the middle of onboarding pulls attention right before the purchase</b>. The same goes for account and ID verification.',
+ kept:'Your map with member pins from your store screenshot, and your own safety wording: location, age and ID checks.',
+ out:'CR +10–15%'}
+};
+function outBlock(lab,val){ return '<div class="pn-out"><div class="lab">'+lab+'</div><div class="v">'+val+'</div></div>'; }
+function paintPanel(){
+  var d=PANEL[cur]; if(!d) return;
+  var h='';
+  if(d.ctx){
+    h += '<div class="pn-n ctx">Context · no change proposed</div><h3 class="pn-t">'+d.t+'</h3><div class="pn-kept">'+d.kept+'</div>';
+  } else {
+    h += '<div class="pn-n">Idea '+d.n+' of 5</div><h3 class="pn-t">'+d.t+'</h3><p class="pn-hyp">'+d.hyp+'</p>'
+       + outBlock('Potential outcome · based on Adapty data', d.out);
+    if(d.hyp2){
+      h += '<div class="pn-sep"></div><div class="pn-n">Idea '+d.n2+' of 5</div>'
+         + '<p class="pn-hyp" style="margin-top:12px">'+d.hyp2+'</p>'
+         + outBlock('Potential outcome · based on Adapty data', d.out2);
+    }
+    h += '<div class="pn-kept"><b>Your design, unchanged.</b> '+d.kept+'</div>';
+  }
+  h += '<div class="pn-foot">Ranges are Adapty’s expected effect from tests across 30,000+ subscription apps — not measured lift for Hiki. Prices, member counts, quotes and feature names come from your own published material.</div>';
+  document.getElementById('panel').innerHTML = h;
+}
+function showView(v){
+  document.querySelectorAll('.view').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('view-'+v).classList.add('on');
+  document.querySelectorAll('.nav-links button[data-view]').forEach(function(b){ b.classList.toggle('on', b.dataset.view===v); });
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.view); }); });
+document.querySelectorAll('.idea[data-jump]').forEach(function(b){ b.addEventListener('click',function(){ showView('proto'); jump(b.dataset.jump); }); });
+
+scr.welcome.classList.add('is-active');
+syncScreen(); paintChips(); paintPanel(); setDark();
+</script>
+</body>
+</html>
